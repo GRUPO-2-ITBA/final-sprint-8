@@ -1,0 +1,29 @@
+{% extends 'clientes/base.html' %} {% load static %} {% block title %}Prestamos {% endblock %} {% block headers %}
+<h1>Prestamos Pre-Aprobados</h1>
+{% endblock %} {% block content %} {% if enviado %}
+<div class="col-lg-8 col-md-10 mx-auto">
+    <p><b>Gracias {{enviado}} !</b></p>
+    <p>
+        <b>Tu mensaje se envio correctamente, en breve nos pondremos en contacto</b>
+    </p>
+</div>
+
+{% else %}
+<div class="container" style="margin: 4rem 10rem">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto" style="margin: 0.5rem 50rem">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group d-flex justify-content-center flex-column">
+                    <table class="" style="margin-top: 3rem">
+                        {{form.as_p}}
+                    </table>
+
+                    <input type="submit" value="Enviar" class="btn btn-primary m-lg-4" style="width: 50%" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endif %} {% endblock %}

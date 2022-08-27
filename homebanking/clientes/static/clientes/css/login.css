@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap");
+
+/*RESETEO DE LA PAG*/
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: min-content;
+  font-family: "Inter", sans-serif;
+  background-color: #fffdf6;
+}
+
+.main {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/*Inicio LAYOUT Formulario*/
+.main .login {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  justify-self: center;
+  padding: 2rem;
+}
+
+.main .login__container-logo {
+  background-color: #fffdf6;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.main .login__container-logo .logo {
+  padding: 0.5rem;
+  width: auto;
+  height: 7rem;
+  object-fit: cover;
+}
+
+.form-login {
+  height: 80%;
+  padding: 0 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.inputs-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  width: 80%;
+  display: block;
+  margin-top: 1.5rem;
+}
+
+input {
+  width: 100%;
+  padding: 1rem 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #000;
+  color: #000;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.2s;
+  margin: 1.5rem 0;
+}
+
+label {
+  font-size: clamp(1rem, 5vw, 1.3rem);
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.checkbox-label label {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.checkbox-input {
+  height: 2rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+}
+
+.btn-login {
+  width: 100%;
+  background-color: rgba(38, 224, 167, 0.7);
+  height: 4rem;
+  border: none;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-size: 1.4rem;
+  transition: 0.3s linear;
+  border-radius: 2rem;
+  color: #fff;
+  box-shadow: 0px 10px 6px -3px rgba(0, 0, 0, 0.07);
+}
+
+.btn-login:hover {
+  background-color: rgb(38, 224, 167);
+}
+
+.help-login {
+  margin-top: 3rem;
+  color: #fc7551;
+  font-size: 1.4rem;
+}
+
+.register-text {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.register-link {
+  margin-top: 1.5rem;
+  color: #fc7551;
+  font-size: 1.4rem;
+}
+
+.help-login:hover,
+.register-link:hover {
+  color: #e48648;
+}
+
+.btn-help {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem 1rem 0;
+  width: clamp(6rem, 6vw, 7.7rem);
+  height: clamp(6rem, 6vw, 7.7rem);
+  background-color: rgba(38, 224, 167, 0.9);
+  border-radius: 50%;
+  font-size: clamp(0.6rem, 5vw, 1.4rem);
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.btn-help:hover {
+  background-color: rgb(38, 224, 167);
+}
+
+/*Final LAYOUT Formulario*/
+
+/*BACKGROUND IMAGE*/
+.main .bg-img {
+  display: none;
+  margin-bottom: 5px ;
+}
+/* footer {
+    position: flex;
+    bottom: 0;
+    height: 5%;
+    background-color: #123444;
+    padding: 3rem;
+    color: #fff;
+    text-align: center;
+    font-size: small;
+} */
+li {
+  list-style: none;
+  display: inline-block;
+  margin: 20px;
+}
+
+#link {
+  color: #fff;
+  text-decoration: underline;
+  font-size: medium;
+  font-weight: 500;
+}
+
+#link:active {
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .main .bg-img {
+    display: block;
+    background-image: url("../img/itba-industry-image.a6e025a71fc2b521ebcecec63cb6e6629b17b92a.jpg");
+    background-size: cover;
+    background-position: center;
+    object-fit: cover;
+  }
+
+  .main .login__container-logo .logo {
+    height: 8rem;
+  }
+}
