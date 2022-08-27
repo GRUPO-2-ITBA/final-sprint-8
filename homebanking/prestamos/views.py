@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.models import Empleado
+from cuentas.models import Cuenta
 
 # @login_required
 
@@ -86,5 +87,11 @@ class PrestamosAdd(APIView):
         serializer = PrestamosSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            cuenta = Cuenta.objects.get(
+                customer_id=request.data["customer_id"])
+            if cuenta:
+                print(cuenta.balance, request.data)
+                cuenta.balance = request.data["loan_total"] + cuenta.balance
+                cuenta.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
