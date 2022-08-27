@@ -14,7 +14,7 @@ class Tarjeta(models.Model):
     card_brand_id = models.IntegerField()
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'tarjeta'
 
 

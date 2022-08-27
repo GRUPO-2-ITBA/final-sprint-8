@@ -40,4 +40,10 @@ urlpatterns = [
          views_prestamos.PrestamosListCliente.as_view(), name='api_prestamos_list'),
     path('api/prestamos_sucursal/<int:sucursal_id>/',
          views_prestamos.PrestamosListSucursal.as_view(), name='api_prestamos_sucursal'),
+    path('api/tarjetas/<int:cliente_dni>/',
+         views_tarjetas.TarjetasListCliente.as_view(), name='api_tarjetas_list'),
+    path('api/cliente/<int:cliente_dni>/',
+         views_clientes.ClientesData.as_view(), name='api_cliente_data'),
+    path('api/cuenta/<int:cliente_dni>/',
+         views_cuentas.CuentaCliente.as_view(), name='api_cliente_cuentas'),
 ]
