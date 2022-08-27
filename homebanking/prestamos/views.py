@@ -1,3 +1,4 @@
+from datetime import date
 from .serializers import PrestamosSerializer
 from django.shortcuts import render, redirect
 from .forms import PrestamoForm
@@ -10,6 +11,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.models import Empleado
+from cuentas.models import Cuenta
 
 # @login_required
 
@@ -74,3 +76,22 @@ class PrestamosListSucursal(APIView):
             serializer = PrestamosSerializer(prestamos, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response('No hay prestamos asociados a la sucursal', status=status.HTTP_404_NOT_FOUND)
+
+
+class PrestamosAdd(APIView):
+    permission_classes = [esEmpleado]
+
+    def post(self, request):
+        data = request.data
+        data['loan_date'] = date.today().strftime('%Y-%m-%d')
+        serializer = PrestamosSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            cuenta = Cuenta.objects.get(
+                customer_id=request.data["customer_id"])
+            if cuenta:
+                print(cuenta.balance, request.data)
+                cuenta.balance = request.data["loan_total"] + cuenta.balance
+                cuenta.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
