@@ -1,3 +1,4 @@
+from datetime import date
 from .serializers import PrestamosSerializer
 from django.shortcuts import render, redirect
 from .forms import PrestamoForm
@@ -74,3 +75,16 @@ class PrestamosListSucursal(APIView):
             serializer = PrestamosSerializer(prestamos, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response('No hay prestamos asociados a la sucursal', status=status.HTTP_404_NOT_FOUND)
+
+
+class PrestamosAdd(APIView):
+    permission_classes = [esEmpleado]
+
+    def post(self, request):
+        data = request.data
+        data['loan_date'] = date.today().strftime('%Y-%m-%d')
+        serializer = PrestamosSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 
 class Prestamo(models.Model):
     loan_id = models.AutoField(primary_key=True)

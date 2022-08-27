@@ -29,7 +29,7 @@ class Empleado(models.Model):
     employee_id = models.AutoField(primary_key=True)
     employee_name = models.CharField(max_length=50)
     employee_surname = models.CharField(max_length=50)
-    employee_hire_date = models.DateField()
+    employee_hire_date = models.TextField()
     # Field name made lowercase.
     employee_dni = models.TextField()
     branch_id = models.IntegerField()

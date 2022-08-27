@@ -5,5 +5,5 @@ from .models import Empleado
 
 class esEmpleado(permissions.BasePermission):
     def has_permission(self, request, view):
-        username = request.user
-        return Empleado.objects.filter(employee_dni=username) is not None
+        username = request.user.username
+        return list(Empleado.objects.filter(employee_dni=username)) != []

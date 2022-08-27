@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from api.models import Empleado
-from .models import Cuenta
+from .models import Cuenta, TipoCuenta
 from clientes.models import Cliente
 from .serializers import CuentasSerializer
 
@@ -25,18 +25,22 @@ class CuentaCliente(APIView):
         owner = str(cliente_dni)
         cliente = Cliente.objects.filter(customer_dni=owner).first()
         if (cliente is not None) and (user.username == owner):
-            tarjetas = Cuenta.objects.filter(
+            cuentas = Cuenta.objects.filter(
                 customer_id=cliente.customer)
-            serializer = CuentasSerializer(tarjetas, many=True)
-            if tarjetas:
+            serializer = CuentasSerializer(cuentas, many=True)
+            serializer.data[0]['account_type'] = TipoCuenta.objects.filter(
+                account_type_id=serializer.data[0]['account_type'])[0].account_type_description
+            if cuentas:
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response('no tiene tarjetas este dni', status=status.HTTP_404_NOT_FOUND)
+            return Response('no tiene cuentas este dni', status=status.HTTP_404_NOT_FOUND)
         elif Empleado.objects.filter(employee_dni=user.username) is not None and cliente is not None:
-            tarjetas = Cuenta.objects.filter(
+            cuentas = Cuenta.objects.filter(
                 customer_id=cliente.customer)
-            serializer = CuentasSerializer(tarjetas, many=True)
-            if tarjetas:
+            serializer = CuentasSerializer(cuentas, many=True)
+            serializer.data[0]['account_type'] = TipoCuenta.objects.filter(
+                account_type_id=serializer.data[0]['account_type'])[0].account_type_description
+            if cuentas:
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response('no tiene tarjetas este id', status=status.HTTP_404_NOT_FOUND)
+            return Response('no tiene cuentas este id', status=status.HTTP_404_NOT_FOUND)
         else:
             return Response('no coincide el dni ni es empleado', status=status.HTTP_401_UNAUTHORIZED)
