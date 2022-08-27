@@ -7,7 +7,7 @@ class Cliente(models.Model):
     customer_surname = models.TextField()
     # Field name made lowercase.
     customer_dni = models.TextField(db_column='customer_DNI')
-    dob = models.IntegerField()
+    dob = models.DateField()
     branch_id = models.IntegerField()
     customer_type_id = models.IntegerField(blank=True, null=True)
     address_id = models.IntegerField(blank=True, null=True)
