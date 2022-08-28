@@ -48,4 +48,8 @@ urlpatterns = [
          views_cuentas.CuentaCliente.as_view(), name='api_cliente_cuentas'),
     path('api/add_prestamo/',
          views_prestamos.PrestamosAdd.as_view(), name='api_prestamos_add'),
+    path('api/delete_prestamo/<int:prestamo_id>/',
+         views_prestamos.PrestamosAdd.as_view(), name='api_prestamos_delete'),
+    path('api/direcciones/<int:cliente_id>/',
+         views_api.DireccionCliente.as_view(), name='api_direccion_update'),
 ]

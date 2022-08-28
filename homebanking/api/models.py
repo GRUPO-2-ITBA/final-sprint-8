@@ -38,3 +38,16 @@ class Empleado(models.Model):
     class Meta:
         managed = True
         db_table = 'empleado'
+
+
+class Direcciones(models.Model):
+    address_id = models.AutoField(primary_key=True)
+    address_street = models.TextField()
+    address_number = models.IntegerField()
+    address_city = models.TextField()
+    address_province = models.TextField()
+    address_country = models.TextField()
+
+    class Meta:
+        managed = False
+        db_table = 'direcciones'
