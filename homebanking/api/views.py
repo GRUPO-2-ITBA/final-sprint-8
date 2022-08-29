@@ -1,7 +1,7 @@
 from .serializers import MovimientosSerializer
 from .models import Movimientos
 from django.shortcuts import render
-# importamos serializador y modelo
+# importamos modelo y serializador
 
 from .serializers import SucursalesSerializer
 from .models import Sucursal
@@ -15,7 +15,7 @@ from .serializers import DireccionesSerializer
 from api.models import Empleado
 from api.permissions import esEmpleado
 from rest_framework import permissions
-# Create your views here.
+# Creamos las vistas aca.
 
 
 class SucursalesLists(APIView):
@@ -38,8 +38,10 @@ class MovimientosLists(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+    
 class DireccionCliente(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    
 
     def put(self, request, cliente_id):
         user = request.user
